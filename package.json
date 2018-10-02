@@ -1,13 +1,13 @@
 {
-  "name": "frontend_l4_chat_project",
+  "name": "simple-slack",
   "version": "0.0.1",
-  "description": "",
+  "description": "Simple copy of Slack",
   "main": "dist/index.js",
   "bin": {
-    "hexlet": "dist/bin/hexlet.js"
+    "slack": "dist/bin/slack.js"
   },
   "engines": {
-    "node": "9"
+    "node": "8"
   },
   "scripts": {
     "test": "jest",
@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:hexlet/frontend_l4_chat_project.git"
+    "url": "https://github.com/tysky/project-lvl4-s307"
   },
-  "author": "Kirill Mokevnin",
+  "author": "Dmitry Tysky",
   "license": "ISC",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/tysky/project-lvl4-s307/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/tysky/project-lvl4-s307#readme",
   "dependencies": {
     "@babel/cli": "^7.0.0-beta.46",
     "@babel/core": "^7.0.0-beta.46",
