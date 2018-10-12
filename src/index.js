@@ -13,5 +13,6 @@ if (process.env.NODE_ENV !== 'production') {
 if (!cookies.get('userName')) {
   cookies.set('userName', faker.name.findName());
 }
+const userName = cookies.get('userName');
 
-app(gon);
+app(gon, userName);
