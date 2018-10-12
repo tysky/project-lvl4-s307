@@ -20,10 +20,11 @@ export default (gon, userName) => {
     ),
   );
 
-  const { channels } = gon;
+  const { channels, messages } = gon;
 
   const context = {
     channels,
+    messages,
     userName,
   };
 

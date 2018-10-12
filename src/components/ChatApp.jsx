@@ -16,14 +16,14 @@ export default function ChatApp() {
             )}
           </ChatContext.Consumer>
         </div>
-        <div className="col align-self-end col-sm-8 col-md-9">
-          <MessagesList />
-          <ChatContext.Consumer>
-            {context => (
+        <ChatContext.Consumer>
+          {context => (
+            <div className="col align-self-end col-sm-8 col-md-9">
+              <MessagesList messages={context.messages} />
               <NewMessageForm userName={context.userName} />
-            )}
-          </ChatContext.Consumer>
-        </div>
+            </div>
+          )}
+        </ChatContext.Consumer>
       </div>
     </React.Fragment>
   );
