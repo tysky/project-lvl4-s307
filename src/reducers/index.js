@@ -17,9 +17,16 @@ const messageSendingState = handleActions({
   },
 }, 'none');
 
+const messages = handleActions({
+  [actions.addSocketMessage](state, { payload }) {
+    return [...state, payload];
+  },
+}, 'none');
+
 
 export default combineReducers({
   currentChannelId,
   messageSendingState,
+  messages,
   form: formReducer,
 });

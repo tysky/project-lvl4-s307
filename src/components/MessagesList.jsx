@@ -2,9 +2,10 @@ import React from 'react';
 import { ListGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-const mapStateToProps = ({ currentChannelId }) => {
+const mapStateToProps = ({ currentChannelId, messages }) => {
   const props = {
     currentChannelId,
+    messages,
   };
   return props;
 };

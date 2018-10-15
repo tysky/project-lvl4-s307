@@ -7,24 +7,27 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from './reducers';
 import ChatContext from './context';
 import ChatApp from './components/ChatApp';
+import { fetchSocketMessages } from './actions';
 
 export default (gon, userName) => {
   /* eslint-disable no-underscore-dangle */
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   /* eslint-enable */
+  const { channels, messages } = gon;
 
   const store = createStore(
     reducers,
+    { messages },
     composeEnhancers(
       applyMiddleware(thunk),
     ),
   );
 
-  const { channels, messages } = gon;
+  store.dispatch(fetchSocketMessages());
+
 
   const context = {
     channels,
-    messages,
     userName,
   };
 

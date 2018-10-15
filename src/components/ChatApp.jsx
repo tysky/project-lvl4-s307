@@ -19,7 +19,7 @@ export default function ChatApp() {
         <ChatContext.Consumer>
           {context => (
             <div className="col align-self-end col-sm-8 col-md-9">
-              <MessagesList messages={context.messages} />
+              <MessagesList />
               <NewMessageForm userName={context.userName} />
             </div>
           )}
