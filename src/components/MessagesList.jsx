@@ -12,14 +12,30 @@ const mapStateToProps = ({ currentChannelId, messages }) => {
 
 @connect(mapStateToProps)
 export default class MessagesList extends React.Component {
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
+  }
+
   render() {
     const messagesStyle = {
-      minHeight: '450px',
+      height: '450px',
+      overflowY: 'auto',
     };
     const { messages, currentChannelId } = this.props;
     const messagesOfCurrentChannel = messages.filter(m => m.channelId === currentChannelId);
     return (
-      <div style={messagesStyle} className="border border-dark p-1">
+      <div
+        style={messagesStyle}
+        className="border border-dark p-1"
+      >
         <ListGroup variant="flush">
           {messagesOfCurrentChannel.map(m => (
             <ListGroup.Item className="px-1 py-0" key={m.id}>
@@ -28,6 +44,9 @@ export default class MessagesList extends React.Component {
             </ListGroup.Item>
           ))}
         </ListGroup>
+        <div
+          ref={(el) => { this.messagesEnd = el; }}
+        />
       </div>
     );
   }
