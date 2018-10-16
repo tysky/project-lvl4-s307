@@ -12,7 +12,7 @@ make install
 ### Run
 
 ```sh
-make develop
+make start
 ```
 
 ### [Live application](https://shielded-atoll-43415.herokuapp.com/)
