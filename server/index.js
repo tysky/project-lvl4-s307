@@ -1,5 +1,5 @@
 // @flow
-
+// import 'babel-polyfill';
 import path from 'path';
 import Koa from 'koa';
 import Pug from 'koa-pug';
@@ -8,6 +8,7 @@ import http from 'http';
 import Router from 'koa-router';
 import koaLogger from 'koa-logger';
 import koaWebpack from 'koa-webpack';
+// import middleware from 'koa-webpack';
 import bodyParser from 'koa-bodyparser';
 import session from 'koa-generic-session';
 import _ from 'lodash';
@@ -24,7 +25,13 @@ export default () => {
   // app.use(serve(path.join(__dirname, '..', 'public')));
   koaWebpack({
     config: webpackConfig,
-  }).then(app.use);
+  }).then((middleware) => {
+    app.use(middleware);
+  });
+  // app.use(middleware({
+  //   config: webpackConfig,
+  // }));
+
 
   const router = new Router();
 
