@@ -1,6 +1,5 @@
 import { createAction } from 'redux-actions';
 import axios from 'axios';
-import io from 'socket.io-client';
 
 import routes from '../routes';
 
@@ -23,15 +22,9 @@ export const addMessage = ({ messageText, userName, currentChannelId }) => async
     const response = await axios.post(routes.messagesUrl(currentChannelId), data);
     dispatch(addMessageSuccess({ task: response.data }));
   } catch (e) {
+    console.error('Error with sending message to server:', e);
     dispatch(addMessageFailure());
   }
 };
 
-export const addSocketMessage = createAction('ADD_SOCKET_MESSAGE');
-
-export const fetchSocketMessages = () => (dispatch) => {
-  const socket = io();
-  socket.on('newMessage', ((message) => {
-    dispatch(addSocketMessage(message.data.attributes));
-  }));
-};
+export const messageFetched = createAction('MESSAGE_FETCHED');

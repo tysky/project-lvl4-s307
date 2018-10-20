@@ -7,7 +7,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from './reducers';
 import ChatContext from './context';
 import ChatApp from './components/ChatApp';
-import { fetchSocketMessages } from './actions';
+import fetchMessages from './socket';
 
 export default (gon, userName) => {
   /* eslint-disable no-underscore-dangle */
@@ -23,7 +23,7 @@ export default (gon, userName) => {
     ),
   );
 
-  store.dispatch(fetchSocketMessages());
+  store.dispatch(fetchMessages());
 
 
   const context = {

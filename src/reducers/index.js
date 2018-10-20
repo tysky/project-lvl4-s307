@@ -18,7 +18,7 @@ const messageSendingState = handleActions({
 }, 'none');
 
 const messages = handleActions({
-  [actions.addSocketMessage](state, { payload }) {
+  [actions.messageFetched](state, { payload }) {
     return [...state, payload];
   },
 }, 'none');

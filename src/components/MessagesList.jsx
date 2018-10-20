@@ -10,8 +10,15 @@ const mapStateToProps = ({ currentChannelId, messages }) => {
   return props;
 };
 
+export default
 @connect(mapStateToProps)
-export default class MessagesList extends React.Component {
+class MessagesList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.messagesEnd = React.createRef();
+  }
+
+
   componentDidMount() {
     this.scrollToBottom();
   }
@@ -21,7 +28,7 @@ export default class MessagesList extends React.Component {
   }
 
   scrollToBottom = () => {
-    this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
+    this.messagesEnd.current.scrollIntoView({ behavior: 'smooth' });
   }
 
   render() {
@@ -45,7 +52,7 @@ export default class MessagesList extends React.Component {
           ))}
         </ListGroup>
         <div
-          ref={(el) => { this.messagesEnd = el; }}
+          ref={this.messagesEnd}
         />
       </div>
     );
