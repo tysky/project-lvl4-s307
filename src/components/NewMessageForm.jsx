@@ -20,7 +20,8 @@ const InputMessage = ({ input, disabled }) => (
       placeholder="Enter message"
       aria-label="Enter message"
       {...input}
-      disabled={disabled}
+      autoComplete="off"
+      autoFocus
     />
     <InputGroup.Append>
       <Button variant="success" type="submit" disabled={disabled}>Send</Button>
@@ -28,15 +29,16 @@ const InputMessage = ({ input, disabled }) => (
   </InputGroup>
 );
 
+export default
 @connect(mapStateToProps, actionCreators)
 @reduxForm({ form: 'newMessage' })
-export default class NewMessageForm extends React.Component {
+class NewMessageForm extends React.Component {
   handleAddingMessage = ({ text }) => {
     const {
       addMessage, reset, currentChannelId, userName,
     } = this.props;
-    addMessage({ messageText: text, userName, currentChannelId });
-    reset();
+    const messageData = { messageText: text, userName, currentChannelId };
+    return addMessage(messageData, reset);
   }
 
   renderAlert = () => (
@@ -47,15 +49,22 @@ export default class NewMessageForm extends React.Component {
   );
 
   render() {
-    const { handleSubmit, messageSendingState } = this.props;
-    const disabled = messageSendingState === 'requested';
+    const {
+      handleSubmit, messageSendingState, pristine, submitting,
+    } = this.props;
     const failed = messageSendingState === 'failed';
     return (
       <div className="mt-3">
         { failed ? this.renderAlert() : null }
         <Form onSubmit={handleSubmit(this.handleAddingMessage)}>
           <Form.Group controlId="inputMessageForm">
-            <Field name="text" required component={InputMessage} type="text" disabled={disabled} />
+            <Field
+              name="text"
+              required
+              component={InputMessage}
+              type="text"
+              disabled={pristine || submitting}
+            />
           </Form.Group>
         </Form>
       </div>
