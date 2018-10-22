@@ -20,8 +20,8 @@ export const addMessage = (messageData, reset) => async (dispatch) => {
   };
   try {
     const response = await axios.post(routes.messagesUrl(currentChannelId), data);
-    reset();
     dispatch(addMessageSuccess({ task: response.data }));
+    reset();
   } catch (e) {
     console.error('Error with sending message to server:', e);
     dispatch(addMessageFailure());
@@ -29,3 +29,5 @@ export const addMessage = (messageData, reset) => async (dispatch) => {
 };
 
 export const messageFetched = createAction('MESSAGE_FETCHED');
+
+export const setCurrentChannel = createAction('CURRENT_CHANNEL_SET');

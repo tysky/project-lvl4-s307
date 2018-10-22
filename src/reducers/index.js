@@ -3,7 +3,11 @@ import { handleActions } from 'redux-actions';
 import { reducer as formReducer } from 'redux-form';
 import * as actions from '../actions';
 
-const currentChannelId = handleActions({}, 1);
+const currentChannelId = handleActions({
+  [actions.setCurrentChannel](state, { payload }) {
+    return payload;
+  },
+}, 1);
 
 const messageSendingState = handleActions({
   [actions.addMessageRequest]() {
