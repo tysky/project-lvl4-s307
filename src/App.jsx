@@ -1,6 +1,6 @@
 import '@babel/polyfill';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -30,7 +30,7 @@ export default (gon, userName) => {
     userName,
   };
 
-  ReactDOM.render(
+  render(
     <Provider store={store}>
       <ChatContext.Provider value={context}>
         <ChatApp />
