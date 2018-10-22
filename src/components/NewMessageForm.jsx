@@ -55,7 +55,7 @@ class NewMessageForm extends React.Component {
     const failed = messageSendingState === 'failed';
     return (
       <div className="mt-3">
-        { failed ? this.renderAlert() : null }
+        { failed && this.renderAlert() }
         <Form onSubmit={handleSubmit(this.handleAddingMessage)}>
           <Form.Group controlId="inputMessageForm">
             <Field

@@ -1,9 +1,9 @@
 import io from 'socket.io-client';
 import { messageFetched } from './actions';
 
-export default () => (dispatch) => {
+export default (store) => {
   const socket = io();
   socket.on('newMessage', ((message) => {
-    dispatch(messageFetched(message.data.attributes));
+    store.dispatch(messageFetched(message.data.attributes));
   }));
 };

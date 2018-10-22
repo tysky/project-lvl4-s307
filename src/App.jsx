@@ -23,8 +23,7 @@ export default (gon, userName) => {
     ),
   );
 
-  store.dispatch(fetchMessages());
-
+  fetchMessages(store);
 
   const context = {
     channels,

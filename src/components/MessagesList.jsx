@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = ({ currentChannelId, messages }) => {
   const props = {
-    currentChannelId,
-    messages,
+    messages: messages.filter(m => m.channelId === currentChannelId),
   };
   return props;
 };
@@ -17,7 +16,6 @@ class MessagesList extends React.Component {
     super(props);
     this.messagesEnd = React.createRef();
   }
-
 
   componentDidMount() {
     this.scrollToBottom();
@@ -36,15 +34,15 @@ class MessagesList extends React.Component {
       height: '450px',
       overflowY: 'auto',
     };
-    const { messages, currentChannelId } = this.props;
-    const messagesOfCurrentChannel = messages.filter(m => m.channelId === currentChannelId);
+    const { messages } = this.props;
+    // const messagesOfCurrentChannel = messages.filter(m => m.channelId === currentChannelId);
     return (
       <div
         style={messagesStyle}
         className="border border-dark p-1"
       >
         <ListGroup variant="flush">
-          {messagesOfCurrentChannel.map(m => (
+          {messages.map(m => (
             <ListGroup.Item className="px-1 py-0" key={m.id}>
               <b>{`${m.userName}:`}</b>
               <span className="pl-2">{m.messageText}</span>
