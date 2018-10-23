@@ -5,6 +5,17 @@
   ],
   "plugins": [
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    ["@babel/plugin-proposal-class-properties", { "loose" : true }]
+    ["@babel/plugin-proposal-class-properties", { "loose" : true }],
+    ["transform-imports", {
+      "react-bootstrap": {
+        "transform": "react-bootstrap/es/${member}",
+        "preventFullImport": true
+      },
+      "redux-form": {
+        "transform": "redux-form/es/${member}",
+        "preventFullImport": true
+      }
+      }
+    ]
   ]
 }

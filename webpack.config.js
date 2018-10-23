@@ -1,3 +1,8 @@
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const devMode = process.env.NODE_ENV !== 'production';
+
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: [
@@ -9,6 +14,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      'lodash-es': 'lodash',
+    },
   },
   output: {
     publicPath: '/assets/',
@@ -26,4 +34,11 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    // new BundleAnalyzerPlugin(),
+    new MiniCssExtractPlugin({
+      filename: devMode ? '[name].css' : '[name].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+    }),
+  ],
 };
