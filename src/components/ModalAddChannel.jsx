@@ -30,7 +30,7 @@ const InputChannelName = ({ input, disabled }) => (
 export default
 @connect(mapStateToProps, actionCreators)
 @reduxForm({ form: 'newChannel' })
-class ModalAddChannell extends React.Component {
+class ModalAddChannel extends React.Component {
   closeModalWindow = () => {
     const { closeModalAddChannel, reset } = this.props;
     closeModalAddChannel();

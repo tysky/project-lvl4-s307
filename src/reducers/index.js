@@ -72,6 +72,28 @@ const channelEditingState = handleActions({
   },
 }, 'none');
 
+// Deleting channel
+const modalDeleteChannel = handleActions({
+  [actions.openModalDeleteChannel](state, { payload: { channelId } }) {
+    return { channelId, modalDeleteChannelShow: true };
+  },
+  [actions.closeModalDeleteChannel]() {
+    return { modalDeleteChannelShow: false };
+  },
+}, { modalDeleteChannelShow: false });
+
+const channelDeletingState = handleActions({
+  [actions.deleteChannelRequest]() {
+    return 'requested';
+  },
+  [actions.deleteChannelFailure]() {
+    return 'failed';
+  },
+  [actions.deleteChannelSuccess]() {
+    return 'successed';
+  },
+}, 'none');
+
 const channels = handleActions({
   [actions.channelsFetched](state, { payload }) {
     return [...state, payload];
@@ -80,16 +102,22 @@ const channels = handleActions({
     const filteredState = state.filter(channel => channel.id !== payload.id);
     return [...filteredState, payload];
   },
+  [actions.channelDeleted](state, { payload }) {
+    const filteredState = state.filter(channel => channel.id !== payload.id);
+    return filteredState;
+  },
 }, 'none');
 
 export default combineReducers({
   channels,
   channelAddingState,
+  channelDeletingState,
   channelEditingState,
   currentChannelId,
   messageSendingState,
   messages,
   modalAddChannel,
+  modalDeleteChannel,
   modalEditChannel,
   form: formReducer,
 });

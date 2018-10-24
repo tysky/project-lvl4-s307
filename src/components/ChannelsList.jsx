@@ -6,6 +6,7 @@ import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import * as actionCreators from '../actions';
 import ModalAddChannel from './ModalAddChannel';
 import ModalEditChannel from './ModalEditChannel';
+import ModalDeleteChannel from './ModalDeleteChannel';
 
 const mapStateToProps = ({ channels, currentChannelId }) => {
   const props = {
@@ -28,12 +29,22 @@ class ChannelsList extends React.Component {
     openModalEditChannel({ channelId });
   }
 
+  openModalDeleting = channelId => () => {
+    const { openModalDeleteChannel } = this.props;
+    openModalDeleteChannel({ channelId });
+  }
+
   switchChannel = channelId => () => {
     const { setCurrentChannel } = this.props;
     setCurrentChannel(channelId);
   }
 
-  renderEditingIcon = id => <FontAwesomeIcon onClick={this.openModalEditing(id)} className="ml-5" icon={faPencilAlt} />
+  renderIcons = id => (
+    <>
+      <FontAwesomeIcon onClick={this.openModalEditing(id)} className="ml-5" icon={faPencilAlt} />
+      <FontAwesomeIcon onClick={this.openModalDeleting(id)} className="ml-2" icon={faTimes} />
+    </>
+  )
 
   render() {
     const { channels } = this.props;
@@ -43,9 +54,7 @@ class ChannelsList extends React.Component {
           {channels.map(({ id, name, removable }) => (
             <ListGroup.Item key={id} action href={`#${name}`} onClick={this.switchChannel(id)}>
               <span>{name}</span>
-              {removable && this.renderEditingIcon(id)}
-              {/* <FontAwesomeIcon onClick={this.openModalEditing(id)} className="ml-5" icon={faPencilAlt} /> */}
-              {/* <FontAwesomeIcon className="ml-2" icon={faTimes} /> */}
+              {removable && this.renderIcons(id)}
             </ListGroup.Item>
           ))}
         </ListGroup>
@@ -58,6 +67,7 @@ class ChannelsList extends React.Component {
         </Button>
         <ModalAddChannel />
         <ModalEditChannel />
+        <ModalDeleteChannel />
       </>
     );
   }
