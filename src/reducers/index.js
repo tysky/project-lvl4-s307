@@ -9,6 +9,7 @@ const currentChannelId = handleActions({
   },
 }, 1);
 
+// messages
 const messageSendingState = handleActions({
   [actions.addMessageRequest]() {
     return 'requested';
@@ -27,6 +28,7 @@ const messages = handleActions({
   },
 }, 'none');
 
+// Adding channel
 const modalAddChannel = handleActions({
   [actions.openModalAddChannel]() {
     return { modalAddChannelShow: true };
@@ -35,7 +37,6 @@ const modalAddChannel = handleActions({
     return { modalAddChannelShow: false };
   },
 }, { modalAddChannelShow: false });
-
 
 const channelAddingState = handleActions({
   [actions.addChannelRequest]() {
@@ -49,18 +50,46 @@ const channelAddingState = handleActions({
   },
 }, 'none');
 
+// Editing channel
+const modalEditChannel = handleActions({
+  [actions.openModalEditChannel](state, { payload: { channelId } }) {
+    return { channelId, modalEditChannelShow: true };
+  },
+  [actions.closeModalEditChannel]() {
+    return { modalEditChannelShow: false };
+  },
+}, { modalEditChannelShow: false });
+
+const channelEditingState = handleActions({
+  [actions.editChannelRequest]() {
+    return 'requested';
+  },
+  [actions.editChannelFailure]() {
+    return 'failed';
+  },
+  [actions.editChannelSuccess]() {
+    return 'successed';
+  },
+}, 'none');
+
 const channels = handleActions({
   [actions.channelsFetched](state, { payload }) {
     return [...state, payload];
+  },
+  [actions.channelEdited](state, { payload }) {
+    const filteredState = state.filter(channel => channel.id !== payload.id);
+    return [...filteredState, payload];
   },
 }, 'none');
 
 export default combineReducers({
   channels,
   channelAddingState,
+  channelEditingState,
   currentChannelId,
   messageSendingState,
   messages,
   modalAddChannel,
+  modalEditChannel,
   form: formReducer,
 });

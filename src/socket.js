@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-import { channelsFetched, messageFetched } from './actions';
+import { channelEdited, channelsFetched, messageFetched } from './actions';
 
 export default (store) => {
   const socket = io();
@@ -8,5 +8,8 @@ export default (store) => {
   }));
   socket.on('newChannel', ((channel) => {
     store.dispatch(channelsFetched(channel.data.attributes));
+  }));
+  socket.on('renameChannel', ((channel) => {
+    store.dispatch(channelEdited(channel.data.attributes));
   }));
 };
