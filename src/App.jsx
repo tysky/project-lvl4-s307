@@ -13,11 +13,11 @@ export default (gon, userName) => {
   /* eslint-disable no-underscore-dangle */
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   /* eslint-enable */
-  const { channels, messages } = gon;
+  // const { channels, messages } = gon;
 
   const store = createStore(
     reducers,
-    { messages },
+    gon,
     composeEnhancers(
       applyMiddleware(thunk),
     ),
@@ -26,7 +26,6 @@ export default (gon, userName) => {
   fetchMessages(store);
 
   const context = {
-    channels,
     userName,
   };
 
