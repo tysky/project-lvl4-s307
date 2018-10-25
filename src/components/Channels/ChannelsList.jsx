@@ -3,7 +3,7 @@ import { Button, ListGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
-import * as actionCreators from '../actions';
+import * as actionCreators from '../../actions';
 import ModalAddChannel from './ModalAddChannel';
 import ModalEditChannel from './ModalEditChannel';
 import ModalDeleteChannel from './ModalDeleteChannel';

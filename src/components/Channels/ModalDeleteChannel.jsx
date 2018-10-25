@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import * as actionCreators from '../actions';
+import * as actionCreators from '../../actions';
 
 const mapStateToProps = ({ modalDeleteChannel, channelDeletingState }) => {
   const { channelId, modalDeleteChannelShow } = modalDeleteChannel;

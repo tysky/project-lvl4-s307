@@ -1,7 +1,7 @@
 import React from 'react';
-import ChannelsList from './ChannelsList';
-import NewMessageForm from './NewMessageForm';
-import MessagesList from './MessagesList';
+import ChannelsList from './Channels/ChannelsList';
+import NewMessageForm from './Messages/NewMessageForm';
+import MessagesList from './Messages/MessagesList';
 import ChatContext from '../context';
 
 

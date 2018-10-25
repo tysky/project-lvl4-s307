@@ -4,15 +4,14 @@ import {
 } from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import * as actionCreators from '../actions';
+import * as actionCreators from '../../actions';
 
-const mapStateToProps = ({ modalEditChannel, channelEditingState }) => {
-  const { channelId, modalEditChannelShow } = modalEditChannel;
+const mapStateToProps = ({ modalAddChannel, channelAddingState }) => {
+  const { modalAddChannelShow } = modalAddChannel;
 
   const props = {
-    modalEditChannelShow,
-    channelEditingState,
-    channelId,
+    modalAddChannelShow,
+    channelAddingState,
   };
   return props;
 };
@@ -25,47 +24,48 @@ const InputChannelName = ({ input, disabled }) => (
     autoComplete="off"
     disabled={disabled}
   />
+
 );
 
 export default
 @connect(mapStateToProps, actionCreators)
 @reduxForm({ form: 'newChannel' })
-class ModalEditChannel extends React.Component {
+class ModalAddChannel extends React.Component {
   closeModalWindow = () => {
-    const { closeModalEditChannel, reset } = this.props;
-    closeModalEditChannel();
+    const { closeModalAddChannel, reset } = this.props;
+    closeModalAddChannel();
     reset();
   }
 
-  handleEditingChannel = ({ channelName }) => {
-    const { channelId, editChannel, reset } = this.props;
-    return editChannel({ channelId, channelName }, reset);
+  handleAddingChannel = ({ channelName }) => {
+    const { addChannel, reset } = this.props;
+    return addChannel(channelName, reset);
   }
 
   renderAlert = () => (
     <Alert dismissible variant="danger">
       <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-      <p>Error while editing channel. Try again please</p>
+      <p>Error while creating channel. Try again please</p>
     </Alert>
   );
 
   render() {
     const {
-      handleSubmit, modalEditChannelShow, channelEditingState, pristine, submitting,
+      handleSubmit, modalAddChannelShow, channelAddingState, pristine, submitting,
     } = this.props;
-    const failed = channelEditingState === 'failed';
+    const failed = channelAddingState === 'failed';
     return (
       <Modal
-        show={modalEditChannelShow}
+        show={modalAddChannelShow}
         onHide={this.closeModalWindow}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <form onSubmit={handleSubmit(this.handleEditingChannel)}>
+        <form onSubmit={handleSubmit(this.handleAddingChannel)}>
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              Edit channel name
+            Create channel
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>

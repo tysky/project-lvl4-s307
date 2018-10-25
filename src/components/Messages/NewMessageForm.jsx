@@ -4,7 +4,7 @@ import {
   Form, InputGroup, FormControl, Button, Alert,
 } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import * as actionCreators from '../actions';
+import * as actionCreators from '../../actions';
 
 const mapStateToProps = ({ currentChannelId, messageSendingState }) => {
   const props = {
