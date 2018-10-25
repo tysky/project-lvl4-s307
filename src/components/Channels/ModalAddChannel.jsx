@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button, FormControl, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions';
 import AlertMessage from '../Alert';
+import InputChannelName from './InputChannelName';
 
 const mapStateToProps = ({ modalWindow, channelAddingState }) => {
   const { show, type } = modalWindow;
@@ -13,17 +14,6 @@ const mapStateToProps = ({ modalWindow, channelAddingState }) => {
   };
   return props;
 };
-
-const InputChannelName = ({ input, disabled }) => (
-  <FormControl
-    placeholder="Enter message"
-    aria-label="Enter message"
-    {...input}
-    autoComplete="off"
-    disabled={disabled}
-  />
-
-);
 
 export default
 @connect(mapStateToProps, actionCreators)
@@ -48,18 +38,10 @@ class ModalAddChannel extends React.Component {
     } = this.props;
     const failed = channelAddingState === 'failed';
     return (
-      <Modal
-        show={modalAddChannelShow}
-        onHide={this.closeModal}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
+      <Modal show={modalAddChannelShow} onHide={this.closeModal} centered>
         <form onSubmit={handleSubmit(this.handleAddingChannel)}>
           <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
-            Create channel
-            </Modal.Title>
+            <Modal.Title>Create channel</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             { failed && this.renderAlert() }
@@ -72,8 +54,8 @@ class ModalAddChannel extends React.Component {
             />
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.closeModalWindow}>Close</Button>
-            <Button variant="success" type="submit" disabled={pristine || submitting}>Send</Button>
+            <Button variant="secondary" onClick={this.closeModal}>Close</Button>
+            <Button variant="success" type="submit" disabled={pristine || submitting}>Add</Button>
           </Modal.Footer>
         </form>
       </Modal>

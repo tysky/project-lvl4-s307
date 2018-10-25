@@ -36,24 +36,16 @@ class ModalDeleteChannel extends React.Component {
     const { modalDeleteChannelShow, channelDeletingState } = this.props;
     const failed = channelDeletingState === 'failed';
     return (
-      <Modal
-        show={modalDeleteChannelShow}
-        onHide={this.closeModal}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
+      <Modal show={modalDeleteChannelShow} onHide={this.closeModal} centered>
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-              Delete channel
-          </Modal.Title>
+          <Modal.Title>Deleting channel</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           Are you sure you want to delete channel?
           { failed && this.renderAlert() }
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={this.closeModalWindow}>Cancel</Button>
+          <Button variant="secondary" onClick={this.closeModal}>Cancel</Button>
           <Button variant="danger" onClick={this.handleDeletingChannel}>Delete</Button>
         </Modal.Footer>
       </Modal>
