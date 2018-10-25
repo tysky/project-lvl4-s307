@@ -8,7 +8,6 @@ import http from 'http';
 import Router from 'koa-router';
 import koaLogger from 'koa-logger';
 import koaWebpack from 'koa-webpack';
-// import middleware from 'koa-webpack';
 import bodyParser from 'koa-bodyparser';
 import session from 'koa-generic-session';
 import _ from 'lodash';
@@ -22,16 +21,12 @@ export default () => {
   app.keys = ['some secret hurr'];
   app.use(session(app));
   app.use(bodyParser());
-  // app.use(serve(path.join(__dirname, '..', 'public')));
+
   koaWebpack({
     config: webpackConfig,
   }).then((middleware) => {
     app.use(middleware);
   });
-  // app.use(middleware({
-  //   config: webpackConfig,
-  // }));
-
 
   const router = new Router();
 

@@ -35,7 +35,6 @@ class MessagesList extends React.Component {
       overflowY: 'auto',
     };
     const { messages } = this.props;
-    // const messagesOfCurrentChannel = messages.filter(m => m.channelId === currentChannelId);
     return (
       <div
         style={messagesStyle}
