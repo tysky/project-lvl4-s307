@@ -20,18 +20,18 @@ export default
 @connect(mapStateToProps, actionCreators)
 class ChannelsList extends React.Component {
   openModalAdding = () => {
-    const { openModalAddChannel } = this.props;
-    openModalAddChannel();
+    const { openModalWindow } = this.props;
+    openModalWindow({ type: 'adding' });
   }
 
   openModalEditing = channelId => () => {
-    const { openModalEditChannel } = this.props;
-    openModalEditChannel({ channelId });
+    const { openModalWindow } = this.props;
+    openModalWindow({ channelId, type: 'editing' });
   }
 
   openModalDeleting = channelId => () => {
-    const { openModalDeleteChannel } = this.props;
-    openModalDeleteChannel({ channelId });
+    const { openModalWindow } = this.props;
+    openModalWindow({ channelId, type: 'deleting' });
   }
 
   switchChannel = channelId => () => {

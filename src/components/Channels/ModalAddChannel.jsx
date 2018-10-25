@@ -6,11 +6,10 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions';
 
-const mapStateToProps = ({ modalAddChannel, channelAddingState }) => {
-  const { modalAddChannelShow } = modalAddChannel;
-
+const mapStateToProps = ({ modalWindow, channelAddingState }) => {
+  const { show, type } = modalWindow;
   const props = {
-    modalAddChannelShow,
+    modalAddChannelShow: show && type === 'adding',
     channelAddingState,
   };
   return props;
@@ -31,9 +30,9 @@ export default
 @connect(mapStateToProps, actionCreators)
 @reduxForm({ form: 'newChannel' })
 class ModalAddChannel extends React.Component {
-  closeModalWindow = () => {
-    const { closeModalAddChannel, reset } = this.props;
-    closeModalAddChannel();
+  closeModal = () => {
+    const { closeModalWindow, reset } = this.props;
+    closeModalWindow();
     reset();
   }
 
@@ -57,7 +56,7 @@ class ModalAddChannel extends React.Component {
     return (
       <Modal
         show={modalAddChannelShow}
-        onHide={this.closeModalWindow}
+        onHide={this.closeModal}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered

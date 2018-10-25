@@ -32,8 +32,8 @@ export const messageFetched = createAction('MESSAGE_FETCHED');
 
 export const setCurrentChannel = createAction('CURRENT_CHANNEL_SET');
 
-export const openModalAddChannel = createAction('MODAL_ADD_CHANNEL_OPEN');
-export const closeModalAddChannel = createAction('MODAL_ADD_CHANNEL_CLOSE');
+export const openModalWindow = createAction('MODAL_WINDOW_OPEN');
+export const closeModalWindow = createAction('MODAL_WINDOW_CLOSE');
 
 export const addChannelRequest = createAction('CHANNEL_ADD_REQUEST');
 export const addChannelSuccess = createAction('CHANNEL_ADD_SUCCESS');
@@ -51,7 +51,7 @@ export const addChannel = (channelName, reset) => async (dispatch) => {
   try {
     await axios.post(routes.channelsUrl(), data);
     dispatch(addChannelSuccess());
-    dispatch(closeModalAddChannel());
+    dispatch(closeModalWindow());
     reset();
   } catch (e) {
     console.error('Error with creating new channel:', e);
@@ -60,9 +60,6 @@ export const addChannel = (channelName, reset) => async (dispatch) => {
 };
 
 export const channelsFetched = createAction('CHANNELS_FETCHED');
-
-export const openModalEditChannel = createAction('MODAL_EDIT_CHANNEL_OPEN');
-export const closeModalEditChannel = createAction('MODAL_EDIT_CHANNEL_CLOSE');
 
 export const editChannelRequest = createAction('CHANNEL_EDIT_REQUEST');
 export const editChannelSuccess = createAction('CHANNEL_EDIT_SUCCESS');
@@ -81,7 +78,7 @@ export const editChannel = (channelData, reset) => async (dispatch) => {
   try {
     await axios.patch(routes.channelUrl(channelId), data);
     dispatch(editChannelSuccess());
-    dispatch(closeModalEditChannel());
+    dispatch(closeModalWindow());
     reset();
   } catch (e) {
     console.error('Error with editing channel\'s name:', e);
@@ -92,9 +89,6 @@ export const editChannel = (channelData, reset) => async (dispatch) => {
 export const channelEdited = createAction('CHANNEL_EDITED');
 
 
-export const openModalDeleteChannel = createAction('MODAL_DELETE_CHANNEL_OPEN');
-export const closeModalDeleteChannel = createAction('MODAL_DELETE_CHANNEL_CLOSE');
-
 export const deleteChannelRequest = createAction('CHANNEL_DELETE_REQUEST');
 export const deleteChannelSuccess = createAction('CHANNEL_DELETE_SUCCESS');
 export const deleteChannelFailure = createAction('CHANNEL_DELETE_FAILURE');
@@ -104,7 +98,7 @@ export const deleteChannel = channelId => async (dispatch) => {
   try {
     await axios.delete(routes.channelUrl(channelId));
     dispatch(deleteChannelSuccess());
-    dispatch(closeModalDeleteChannel());
+    dispatch(closeModalWindow());
   } catch (e) {
     console.error('Error with deleting channel:', e);
     dispatch(deleteChannelFailure());

@@ -9,7 +9,6 @@ const currentChannelId = handleActions({
   },
 }, 1);
 
-// messages
 const messageSendingState = handleActions({
   [actions.addMessageRequest]() {
     return 'requested';
@@ -28,15 +27,16 @@ const messages = handleActions({
   },
 }, 'none');
 
-// Adding channel
-const modalAddChannel = handleActions({
-  [actions.openModalAddChannel]() {
-    return { modalAddChannelShow: true };
+
+const modalWindow = handleActions({
+  [actions.openModalWindow](state, { payload: { channelId, type } }) {
+    return { channelId, type, show: true };
   },
-  [actions.closeModalAddChannel]() {
-    return { modalAddChannelShow: false };
+  [actions.closeModalWindow]() {
+    return { show: false };
   },
-}, { modalAddChannelShow: false });
+}, { show: false });
+
 
 const channelAddingState = handleActions({
   [actions.addChannelRequest]() {
@@ -50,16 +50,6 @@ const channelAddingState = handleActions({
   },
 }, 'none');
 
-// Editing channel
-const modalEditChannel = handleActions({
-  [actions.openModalEditChannel](state, { payload: { channelId } }) {
-    return { channelId, modalEditChannelShow: true };
-  },
-  [actions.closeModalEditChannel]() {
-    return { modalEditChannelShow: false };
-  },
-}, { modalEditChannelShow: false });
-
 const channelEditingState = handleActions({
   [actions.editChannelRequest]() {
     return 'requested';
@@ -72,16 +62,6 @@ const channelEditingState = handleActions({
   },
 }, 'none');
 
-// Deleting channel
-const modalDeleteChannel = handleActions({
-  [actions.openModalDeleteChannel](state, { payload: { channelId } }) {
-    return { channelId, modalDeleteChannelShow: true };
-  },
-  [actions.closeModalDeleteChannel]() {
-    return { modalDeleteChannelShow: false };
-  },
-}, { modalDeleteChannelShow: false });
-
 const channelDeletingState = handleActions({
   [actions.deleteChannelRequest]() {
     return 'requested';
@@ -93,6 +73,7 @@ const channelDeletingState = handleActions({
     return 'successed';
   },
 }, 'none');
+
 
 const channels = handleActions({
   [actions.channelsFetched](state, { payload }) {
@@ -116,8 +97,6 @@ export default combineReducers({
   currentChannelId,
   messageSendingState,
   messages,
-  modalAddChannel,
-  modalDeleteChannel,
-  modalEditChannel,
+  modalWindow,
   form: formReducer,
 });

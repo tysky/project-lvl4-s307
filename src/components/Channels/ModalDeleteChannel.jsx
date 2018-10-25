@@ -3,11 +3,11 @@ import { Alert, Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions';
 
-const mapStateToProps = ({ modalDeleteChannel, channelDeletingState }) => {
-  const { channelId, modalDeleteChannelShow } = modalDeleteChannel;
+const mapStateToProps = ({ modalWindow, channelDeletingState }) => {
+  const { channelId, show, type } = modalWindow;
 
   const props = {
-    modalDeleteChannelShow,
+    modalDeleteChannelShow: show && type === 'deleting',
     channelDeletingState,
     channelId,
   };
@@ -18,9 +18,9 @@ const mapStateToProps = ({ modalDeleteChannel, channelDeletingState }) => {
 export default
 @connect(mapStateToProps, actionCreators)
 class ModalDeleteChannel extends React.Component {
-  closeModalWindow = () => {
-    const { closeModalDeleteChannel } = this.props;
-    closeModalDeleteChannel();
+  closeModal = () => {
+    const { closeModalWindow } = this.props;
+    closeModalWindow();
   }
 
   handleDeletingChannel = () => {
@@ -41,7 +41,7 @@ class ModalDeleteChannel extends React.Component {
     return (
       <Modal
         show={modalDeleteChannelShow}
-        onHide={this.closeModalWindow}
+        onHide={this.closeModal}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
