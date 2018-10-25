@@ -1,10 +1,9 @@
 import React from 'react';
-import {
-  Alert, Button, FormControl, Modal,
-} from 'react-bootstrap';
+import { Button, FormControl, Modal } from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions';
+import AlertMessage from '../Alert';
 
 const mapStateToProps = ({ modalWindow, channelAddingState }) => {
   const { show, type } = modalWindow;
@@ -41,12 +40,7 @@ class ModalAddChannel extends React.Component {
     return addChannel(channelName, reset);
   }
 
-  renderAlert = () => (
-    <Alert dismissible variant="danger">
-      <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-      <p>Error while creating channel. Try again please</p>
-    </Alert>
-  );
+  renderAlert = () => <AlertMessage message="Error while creating channel" />
 
   render() {
     const {

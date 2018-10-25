@@ -1,7 +1,9 @@
 import React from 'react';
-import { Alert, Button, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions';
+import AlertMessage from '../Alert';
+
 
 const mapStateToProps = ({ modalWindow, channelDeletingState }) => {
   const { channelId, show, type } = modalWindow;
@@ -28,12 +30,7 @@ class ModalDeleteChannel extends React.Component {
     return deleteChannel(channelId);
   }
 
-  renderAlert = () => (
-    <Alert dismissible variant="danger">
-      <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-      <p>Error while deleting channel. Try again please</p>
-    </Alert>
-  );
+  renderAlert = () => <AlertMessage message="Error while deleting channel" />
 
   render() {
     const { modalDeleteChannelShow, channelDeletingState } = this.props;

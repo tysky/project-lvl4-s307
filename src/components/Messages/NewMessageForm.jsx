@@ -1,10 +1,11 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {
-  Form, InputGroup, FormControl, Button, Alert,
+  Form, InputGroup, FormControl, Button,
 } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../actions';
+import AlertMessage from '../Alert';
 
 const mapStateToProps = ({ currentChannelId, messageSendingState }) => {
   const props = {
@@ -41,12 +42,7 @@ class NewMessageForm extends React.Component {
     return addMessage(messageData, reset);
   }
 
-  renderAlert = () => (
-    <Alert dismissible variant="danger">
-      <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-      <p>Error while sending message. Try again please</p>
-    </Alert>
-  );
+  renderAlert = () => <AlertMessage message="Error while sending message" />
 
   render() {
     const {
