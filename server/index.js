@@ -7,6 +7,8 @@ import socket from 'socket.io';
 import http from 'http';
 import Router from 'koa-router';
 import koaLogger from 'koa-logger';
+import serve from 'koa-static';
+import mount from 'koa-mount';
 import koaWebpack from 'koa-webpack';
 import bodyParser from 'koa-bodyparser';
 import session from 'koa-generic-session';
@@ -21,6 +23,7 @@ export default () => {
   app.keys = ['some secret hurr'];
   app.use(session(app));
   app.use(bodyParser());
+  app.use(mount('/assets', serve('assets')));
 
   koaWebpack({
     config: webpackConfig,

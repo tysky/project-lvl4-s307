@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button, ListGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import * as actionCreators from '../../actions';
 import ModalAddChannel from './ModalAddChannel';
 import ModalEditChannel from './ModalEditChannel';
@@ -41,19 +39,32 @@ class ChannelsList extends React.Component {
 
   renderIcons = id => (
     <>
-      <FontAwesomeIcon onClick={this.openModalEditing(id)} className="ml-5" icon={faPencilAlt} />
-      <FontAwesomeIcon onClick={this.openModalDeleting(id)} className="ml-2" icon={faTimes} />
+      <a href={`#edit-channel-${id}`} role="button" onClick={this.openModalEditing(id)} style={{ marginLeft: 'auto' }}>
+        <img src="/assets/images/edit.svg" alt="edit channel name" />
+      </a>
+      <a href={`#delete-channel-${id}`} role="button" onClick={this.openModalDeleting(id)}>
+        <img src="/assets/images/delete.svg" alt="delete channel name" />
+      </a>
     </>
   )
 
   render() {
-    const { channels } = this.props;
+    const { channels, currentChannelId } = this.props;
+    const channelStyle = { display: 'flex' };
+    const currentChannelDivStyle = { display: 'flex', backgroundColor: '#17a2b8' };
+    const currentChannelLinkStyle = { color: 'white', fontWeight: 'bold' };
     return (
       <>
-        <ListGroup defaultActiveKey={`#${channels[0].name}`}>
+        <ListGroup>
           {channels.map(({ id, name, removable }) => (
-            <ListGroup.Item key={id} action href={`#${name}`} onClick={this.switchChannel(id)}>
-              <span>{name}</span>
+            <ListGroup.Item key={id} style={currentChannelId === id ? currentChannelDivStyle : channelStyle}>
+              <a
+                onClick={this.switchChannel(id)}
+                href={`#${name}`}
+                style={currentChannelId === id ? currentChannelLinkStyle : null}
+              >
+                {name}
+              </a>
               {removable && this.renderIcons(id)}
             </ListGroup.Item>
           ))}
