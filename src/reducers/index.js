@@ -35,6 +35,15 @@ const modalWindow = handleActions({
   [actions.closeModalWindow]() {
     return { show: false };
   },
+  [actions.addChannelSuccess]() {
+    return { show: false };
+  },
+  [actions.editChannelSuccess]() {
+    return { show: false };
+  },
+  [actions.deleteChannelSuccess]() {
+    return { show: false };
+  },
 }, { show: false });
 
 
@@ -81,7 +90,8 @@ const channels = handleActions({
   },
   [actions.channelEdited](state, { payload }) {
     const filteredState = state.filter(channel => channel.id !== payload.id);
-    return [...filteredState, payload];
+    const newState = [...filteredState, payload].sort((a, b) => (a.id - b.id));
+    return newState;
   },
   [actions.channelDeleted](state, { payload }) {
     const filteredState = state.filter(channel => channel.id !== payload.id);

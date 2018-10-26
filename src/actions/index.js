@@ -51,7 +51,6 @@ export const addChannel = (channelName, reset) => async (dispatch) => {
   try {
     await axios.post(routes.channelsUrl(), data);
     dispatch(addChannelSuccess());
-    dispatch(closeModalWindow());
     reset();
   } catch (e) {
     console.error('Error with creating new channel:', e);
@@ -78,7 +77,6 @@ export const editChannel = (channelData, reset) => async (dispatch) => {
   try {
     await axios.patch(routes.channelUrl(channelId), data);
     dispatch(editChannelSuccess());
-    dispatch(closeModalWindow());
     reset();
   } catch (e) {
     console.error('Error with editing channel\'s name:', e);
@@ -98,7 +96,6 @@ export const deleteChannel = channelId => async (dispatch) => {
   try {
     await axios.delete(routes.channelUrl(channelId));
     dispatch(deleteChannelSuccess());
-    dispatch(closeModalWindow());
   } catch (e) {
     console.error('Error with deleting channel:', e);
     dispatch(deleteChannelFailure());
