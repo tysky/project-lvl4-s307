@@ -10,7 +10,6 @@
     "node": "8"
   },
   "scripts": {
-    "test": "jest",
     "build-server": "babel server --out-dir dist --source-maps inline",
     "build-app": "npx webpack -p --env production",
     "build": "npm run build-app && npm run build-server",
@@ -34,7 +33,6 @@
     "@babel/plugin-proposal-decorators": "^7.1.2",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
-    "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "axios": "^0.18.0",
     "babel-loader": "^8.0.4",
@@ -64,7 +62,6 @@
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-actions": "^2.6.1",
-    "redux-bootstrap": "^1.3.0",
     "redux-form": "^7.4.2",
     "redux-thunk": "^2.3.0",
     "socket.io": "^2.1.1",
@@ -76,19 +73,12 @@
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
     "eslint": "^5.7.0",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-flowtype": "^3.0.0",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "^21.21.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "file-loader": "^2.0.0",
-    "flow-bin": "^0.83.0",
-    "flow-typed": "^2.5.1",
-    "jest": "^23.6.0",
-    "jest-cli": "^23.6.0",
     "nodemon": "^1.18.4",
     "webpack-bundle-analyzer": "^3.0.3"
   }
